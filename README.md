@@ -1,10 +1,24 @@
-## DocInsight, by Srcbook
+慧研助手 (HuiYan Assistant)
 
-This app was created using https://srcbook.com.
-Need help or want to join the community? Join our [Discord](https://discord.gg/shDEGBSe2d).
+慧研助手是一款专门面向科研工作者的智能写作辅助工具，致力于提高国家自然科学基金申请书的撰写质量和申请成功率。通过 AI 技术赋能，为科研人员提供全方位的申请书优化建议。
+🌟 核心特性
+智能写作辅助
 
-To run the devserver:
-```
-npm install
-npm run dev
-```
+实时语言润色与纠错
+专业术语规范检查
+段落逻辑优化建议
+参考文献格式自动规范化
+
+申请书质量提升
+
+研究方案完整性检查
+创新点提炼与强化
+预期成果表述优化
+经费预算合理性分析
+
+经验库与案例分析
+
+往年优秀申请书案例库
+常见问题与解决方案
+评审专家反馈数据库
+学科分类智能推荐
