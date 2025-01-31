@@ -3,14 +3,41 @@ import time
 class UiHandler:
     def __init__(self, ai_core):
         self.ai_core = ai_core
-        self.deep_thinking_enabled = False  # 控制是否启用深度思考模式
+        self.thinking_modes = {
+            'quick': {
+                'name': '快速响应',
+                'depth': 'quick',
+                'show_process': False,
+                'detail_level': 1
+            },
+            'normal': {
+                'name': '标准思考',
+                'depth': 'normal',
+                'show_process': True,
+                'detail_level': 2
+            },
+            'deep': {
+                'name': '深度思考',
+                'depth': 'deep',
+                'show_process': True,
+                'detail_level': 3
+            }
+        }
+        self.current_mode = 'quick'
 
-    def toggle_deep_thinking(self):
-        """切换深度思考模式"""
-        self.deep_thinking_enabled = not self.deep_thinking_enabled
-        status = "开启" if self.deep_thinking_enabled else "关闭"
-        print(f"\n🔄 深度思考模式已{status}")
-        return self.deep_thinking_enabled
+    def toggle_thinking_mode(self, mode=None):
+        """切换思考模式"""
+        if mode and mode in self.thinking_modes:
+            self.current_mode = mode
+        else:
+            # 循环切换：quick -> normal -> deep -> quick
+            modes = list(self.thinking_modes.keys())
+            current_index = modes.index(self.current_mode)
+            self.current_mode = modes[(current_index + 1) % len(modes)]
+        
+        # 更新AI核心的思考模式
+        self.ai_core.set_thinking_mode(self.thinking_modes[self.current_mode])
+        return self.thinking_modes[self.current_mode]['name']
 
     def display_thinking_process(self, thinking_results):
         """增强版思考过程显示"""
@@ -38,27 +65,24 @@ class UiHandler:
             print(f"  {result}")
 
     def process_user_input(self, user_input):
-        """增强版用户输入处理"""
-        if user_input.strip().lower() == "/deep":
-            return self.toggle_deep_thinking()
-            
-        if self.deep_thinking_enabled:
-            print("\n🤖 启动深度思考模式...\n")
-            
-            # 获取深度思考结果
-            thinking_results = self.ai_core.deep_thinking_process(user_input)
-            
-            # 显示思考过程
+        """处理用户输入"""
+        if user_input.startswith('/mode'):
+            # 处理模式切换命令
+            parts = user_input.split()
+            if len(parts) > 1 and parts[1] in self.thinking_modes:
+                mode_name = self.toggle_thinking_mode(parts[1])
+                return f"已切换到{mode_name}模式"
+            else:
+                return "可用的模式: " + ", ".join(self.thinking_modes.keys())
+        
+        # 获取思考结果
+        thinking_results = self.ai_core.deep_thinking_process(user_input)
+        
+        # 显示思考过程
+        if self.thinking_modes[self.current_mode]['show_process']:
             self.display_thinking_process(thinking_results)
-            
-            # 生成最终答案
-            final_answer = self.ai_core.generate_response(user_input, thinking_results)
-            
-            print("\n📊 最终结论：")
-            print(final_answer)
-        else:
-            # 普通模式下的处理
-            final_answer = self.ai_core.quick_response(user_input)
-            print(f"\n💭 回答：\n{final_answer}")
-            
+        
+        # 生成最终答案
+        final_answer = self.ai_core.generate_response(user_input, thinking_results)
+        
         return final_answer 

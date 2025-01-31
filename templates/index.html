@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI深度思考助手 - 智能分析、深度思考、解决方案生成。提供专业的问题分析和决策支持。">
+    <meta name="keywords" content="AI助手,深度思考,人工智能,问题分析,决策支持,智能分析,AI工具">
+    <meta name="author" content="Your Name">
+    <title>AI深度思考助手 - 智能分析与决策支持系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="AI深度思考助手">
+                <h1>AI深度思考助手</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#features">功能特点</a></li>
+                <li><a href="#how-it-works">工作原理</a></li>
+                <li><a href="#try-it">立即体验</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>用AI的力量激发深度思考</h1>
+                <p>让决策更明智，分析更深入，结论更可靠</p>
+                <a href="#try-it" class="cta-button">开始体验</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <h2>核心功能</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="icon-brain"></i>
+                    <h3>深度思考模式</h3>
+                    <p>系统化的问题分析流程，多维度思考问题</p>
+                </div>
+                <div class="feature-card">
+                    <i class="icon-analysis"></i>
+                    <h3>智能分析</h3>
+                    <p>自动提取关键信息，建立知识关联</p>
+                </div>
+                <div class="feature-card">
+                    <i class="icon-solution"></i>
+                    <h3>方案生成</h3>
+                    <p>综合评估多个解决方案，提供最优建议</p>
+                </div>
+                <div class="feature-card">
+                    <i class="icon-quick"></i>
+                    <h3>快速响应</h3>
+                    <p>支持快速问答模式，即时获取答案</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works">
+            <h2>工作原理</h2>
+            <div class="process-flow">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>问题分解</h3>
+                    <p>智能拆解问题要素，明确目标和约束</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>信息收集</h3>
+                    <p>自动收集相关信息，建立知识联系</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>方案评估</h3>
+                    <p>多维度评估方案可行性和风险</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>结论生成</h3>
+                    <p>形成最终建议和执行方案</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="try-it" class="try-it">
+            <h2>立即体验</h2>
+            <div class="mode-instructions">
+                <div class="instruction-card">
+                    <h3>🤔 深度思考模式</h3>
+                    <p>开启方式：</p>
+                    <ul>
+                        <li>点击右下角的"切换思考模式"按钮</li>
+                        <li>或输入 "/deep" 命令切换</li>
+                    </ul>
+                    <p>特点：</p>
+                    <ul>
+                        <li>系统会展示完整的思考过程</li>
+                        <li>多角度分析问题</li>
+                        <li>提供详细的解决方案</li>
+                    </ul>
+                </div>
+                <div class="instruction-card">
+                    <h3>⚡ 快速响应模式</h3>
+                    <p>默认模式：</p>
+                    <ul>
+                        <li>直接给出简洁答案</li>
+                        <li>适合简单问题咨询</li>
+                        <li>响应速度更快</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="chat-container">
+                <div class="chat-box" id="chatBox">
+                    <!-- 聊天记录将在这里显示 -->
+                </div>
+                <div class="input-container">
+                    <input type="text" id="userInput" placeholder="输入您的问题...">
+                    <button id="sendButton">发送</button>
+                    <button id="toggleMode" class="mode-toggle">切换思考模式</button>
+                </div>
+                <div class="mode-status">
+                    <p>当前模式: <span id="currentMode">快速响应</span></p>
+                    <p class="mode-tip">💡 提示：深度思考模式适合复杂问题分析，会展示详细的思考过程</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>联系我们</h2>
+            <div class="contact-info">
+                <p>如果您有任何问题或建议，请随时与我们联系</p>
+                <a href="mailto:contact@example.com" class="contact-button">发送邮件</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>关于我们</h3>
+                <p>AI深度思考助手致力于提供智能化的问题分析和决策支持服务</p>
+            </div>
+            <div class="footer-section">
+                <h3>快速链接</h3>
+                <ul>
+                    <li><a href="#features">功能特点</a></li>
+                    <li><a href="#how-it-works">工作原理</a></li>
+                    <li><a href="#try-it">立即体验</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>联系方式</h3>
+                <p>邮箱：contact@example.com</p>
+                <p>电话：+86 123 4567 8900</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 AI深度思考助手. 保留所有权利.</p>
+        </div>
+    </footer>
+</body>
+</html> 

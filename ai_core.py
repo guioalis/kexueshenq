@@ -4,29 +4,59 @@ class AICore:
     def __init__(self):
         self.context_history = []
         self.knowledge_base = {}  # 可以扩展为实际的知识库
+        self.thinking_mode = {
+            'depth': 'normal',  # 可选值: 'quick', 'normal', 'deep'
+            'show_process': True,  # 是否显示思考过程
+            'detail_level': 2  # 1: 简略, 2: 标准, 3: 详细
+        }
+        
+    def set_thinking_mode(self, mode_config):
+        """设置思考模式"""
+        self.thinking_mode.update(mode_config)
         
     def deep_thinking_process(self, question):
         """增强版深度思考处理函数"""
-        thinking_steps = [
-            "1. 问题分解与理解",
-            "2. 信息收集与分析",
-            "3. 知识关联与推理",
-            "4. 方案生成与评估",
-            "5. 验证与优化",
-            "6. 最终结论总结"
-        ]
-        
+        if self.thinking_mode['depth'] == 'quick':
+            return self._quick_thinking(question)
+            
+        thinking_steps = self._get_thinking_steps()
         thinking_results = []
         print("\n=== 开始深度思考过程 ===\n")
         
         for step in thinking_steps:
-            print(f"🤔 {step}")
+            if self.thinking_mode['show_process']:
+                print(f"🤔 {step}")
             time.sleep(0.5)  # 思考反馈
             result = self._process_thinking_step(step, question)
             thinking_results.append(result)
             self.context_history.append({"step": step, "result": result})
         
         return thinking_results
+    
+    def _get_thinking_steps(self):
+        """根据思考模式返回相应的步骤"""
+        if self.thinking_mode['depth'] == 'normal':
+            return [
+                "1. 问题分解与理解",
+                "2. 信息收集与分析",
+                "3. 方案生成与评估",
+                "4. 最终结论总结"
+            ]
+        else:  # deep mode
+            return [
+                "1. 问题分解与理解",
+                "2. 信息收集与分析",
+                "3. 知识关联与推理",
+                "4. 方案生成与评估",
+                "5. 验证与优化",
+                "6. 最终结论总结"
+            ]
+    
+    def _quick_thinking(self, question):
+        """快速思考模式"""
+        return [{
+            "快速回答": self._generate_simple_response(question)
+        }]
 
     def _process_thinking_step(self, step, question):
         """增强版思考步骤处理"""
