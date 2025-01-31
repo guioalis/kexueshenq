@@ -116,3 +116,34 @@ class AICore:
         return ["目标1", "目标2"]  # 实现目标识别
     
     # ... 其他辅助方法的实现 ... 
+
+    def quick_response(self, question):
+        """快速响应模式"""
+        # 实现简单的响应逻辑
+        return self._generate_simple_response(question)
+
+    def _generate_simple_response(self, question):
+        """生成简单的响应"""
+        # 这里可以实现基础的问答逻辑
+        return f"这是对问题 '{question}' 的快速回答"
+
+    def generate_response(self, question, thinking_results):
+        """基于深度思考结果生成最终回答"""
+        # 从思考结果中提取关键信息
+        conclusion = None
+        for result in thinking_results:
+            if isinstance(result, dict) and "最佳方案" in result:
+                conclusion = result
+                break
+        
+        if conclusion:
+            response = (
+                f"基于深度分析，我的建议是：\n\n"
+                f"🎯 最佳方案：{conclusion['最佳方案']}\n\n"
+                f"📋 决策依据：{conclusion['决策依据']}\n\n"
+                f"📝 执行建议：{conclusion['执行建议']}"
+            )
+        else:
+            response = "抱歉，无法得出明确结论。"
+            
+        return response 

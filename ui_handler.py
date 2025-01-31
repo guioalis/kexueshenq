@@ -3,6 +3,14 @@ import time
 class UiHandler:
     def __init__(self, ai_core):
         self.ai_core = ai_core
+        self.deep_thinking_enabled = False  # 控制是否启用深度思考模式
+
+    def toggle_deep_thinking(self):
+        """切换深度思考模式"""
+        self.deep_thinking_enabled = not self.deep_thinking_enabled
+        status = "开启" if self.deep_thinking_enabled else "关闭"
+        print(f"\n🔄 深度思考模式已{status}")
+        return self.deep_thinking_enabled
 
     def display_thinking_process(self, thinking_results):
         """增强版思考过程显示"""
@@ -31,18 +39,26 @@ class UiHandler:
 
     def process_user_input(self, user_input):
         """增强版用户输入处理"""
-        print("\n🤖 启动深度思考模式...\n")
-        
-        # 获取深度思考结果
-        thinking_results = self.ai_core.deep_thinking_process(user_input)
-        
-        # 显示思考过程
-        self.display_thinking_process(thinking_results)
-        
-        # 生成最终答案
-        final_answer = self.ai_core.generate_response(user_input, thinking_results)
-        
-        print("\n📊 最终结论：")
-        print(final_answer)
-        
+        if user_input.strip().lower() == "/deep":
+            return self.toggle_deep_thinking()
+            
+        if self.deep_thinking_enabled:
+            print("\n🤖 启动深度思考模式...\n")
+            
+            # 获取深度思考结果
+            thinking_results = self.ai_core.deep_thinking_process(user_input)
+            
+            # 显示思考过程
+            self.display_thinking_process(thinking_results)
+            
+            # 生成最终答案
+            final_answer = self.ai_core.generate_response(user_input, thinking_results)
+            
+            print("\n📊 最终结论：")
+            print(final_answer)
+        else:
+            # 普通模式下的处理
+            final_answer = self.ai_core.quick_response(user_input)
+            print(f"\n💭 回答：\n{final_answer}")
+            
         return final_answer 
